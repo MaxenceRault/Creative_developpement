@@ -1,10 +1,11 @@
 import React from 'react';
-import Logo from './components/logo';
+
+import Calme from './components/calme';
 
 const App = () => {
     return (
         <div>
-            <Logo />
+            <Calme />
         </div>
     );
 };
