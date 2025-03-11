@@ -13,6 +13,7 @@
     "animejs": "^3.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "tailwind": "^4.0.0",
     "three": "^0.174.0"
   },
   "devDependencies": {

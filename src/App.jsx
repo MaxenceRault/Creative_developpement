@@ -1,11 +1,14 @@
 import React from 'react';
 
-import Calme from './components/calme';
+import VolumeTrap from './components/frustration.jsx';
+
+import Calme from './components/calme.jsx';
 
 const App = () => {
     return (
         <div>
             <Calme />
+            <VolumeTrap />
         </div>
     );
 };
