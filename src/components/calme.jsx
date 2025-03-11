@@ -89,35 +89,31 @@ const Calm = () => {
     }
   };
 
-  // Couleur des barres Goo via variable CSS --goo-blue
+  // Définir la couleur des barres Goo via la variable CSS --goo-blue
   let gooButtonStyle = {};
   if (activeSound === 'drop') {
     gooButtonStyle = { '--goo-blue': '#7fb9e6' }; // Bleu pastel
   } else if (activeSound === 'ocean') {
-    gooButtonStyle = { '--goo-blue': '#FFB347' }; // Teinte coucher de soleil (golden)
+    gooButtonStyle = { '--goo-blue': '#FFB347' }; // Teinte coucher de soleil
   } else if (activeSound === 'tree') {
     gooButtonStyle = { '--goo-blue': '#4CAF50' }; // Vert
   } else {
     gooButtonStyle = { '--goo-blue': '#7fb9e6' };
   }
 
-  // Background dynamique
+  // Définir le background dynamique
   let backgroundStyle = {};
-  
   if (activeSound === 'ocean') {
     backgroundStyle = {
       background: 'linear-gradient(135deg, #FF7E5F, #FEB47B)',
-      transition: 'background 0.5s ease',
     };
   } else if (activeSound === 'tree') {
     backgroundStyle = {
       background: 'linear-gradient(135deg, #4CAF50, #81C784)',
-      transition: 'background 0.5s ease',
     };
   } else {
     backgroundStyle = {
       background: 'linear-gradient(135deg, #A1C6EA, #F0F8FF)',
-      transition: 'background 0.5s ease',
     };
   }
 
@@ -129,7 +125,7 @@ const Calm = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* Afficher le soleil pour Ocean et Tree avec une animation de montée */}
+      {/* Soleil : affiché pour Ocean et Tree avec animation de montée */}
       <AnimatePresence>
         {(activeSound === 'ocean' || activeSound === 'tree') && (
           <motion.div 
@@ -142,7 +138,7 @@ const Calm = () => {
         )}
       </AnimatePresence>
       
-      {/* Feuilles tombantes uniquement pour Tree */}
+      {/* Feuilles tombantes pour Tree */}
       <AnimatePresence>
         {activeSound === 'tree' && (
           <motion.div 
@@ -159,17 +155,28 @@ const Calm = () => {
         )}
       </AnimatePresence>
 
+      {/* Contenu principal animé au scroll ou au survol */}
       <motion.div 
         className="content"
         initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
+        viewport={{ once: true }}
       >
-        <h1>Le calme
-        </h1>
-        
+        <h1>Le Calme</h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.03, transition: { duration: 0.5 } }}
+        >
+          Plongez dans un univers où chaque nuance de bleu, de doré ou de vert est pensée pour vous envelopper d'une sensation de sérénité profonde.
+          Laissez-vous bercer par la douceur du mouvement, l'éclat discret du soleil et la danse légère des feuilles.
+        </motion.p>
       </motion.div>
       
+      {/* Boutons Goo animés */}
       <motion.div 
         className="goo-buttons" 
         style={gooButtonStyle}

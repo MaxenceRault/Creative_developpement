@@ -57,6 +57,7 @@
   height: 100%;
   position: absolute;
   top: 50%;
+  
   transform: translateY(-50%);
   background: var(--goo-blue);
   transition: 0.7s cubic-bezier(0, 2, 0.7, 2);
@@ -93,6 +94,7 @@
   margin: 0;
   padding-top: 30px; /* Centrage vertical */
   transition: 0.5s;
+  margin-left: 22px;
 }
 
 .calme-button:hover p {
