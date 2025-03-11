@@ -1,0 +1,41 @@
+.intro {
+    height: 100vh;
+    background: linear-gradient(to bottom, #c8a2c8, #f2d1c9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  .intro-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: slideDown 2s forwards;
+  }
+  
+  .intro-subtitle {
+    font-size: 1.5rem;
+    max-width: 80%;
+    opacity: 0;
+    animation: slideUp 2s forwards;
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  

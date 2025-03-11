@@ -1,0 +1,157 @@
+.calm-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #2a5674;
+  /* Le background est géré dynamiquement via inline style */
+  transition: background 0.5s ease;
+}
+
+.sun-element {
+  position: absolute;
+  top: -100px; /* Départ hors écran en haut */
+  right: 20px; /* Positionné à 20px du bord droit */
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #ffeb3b, #f0a500);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 235, 59, 0.7);
+  z-index: 20;
+  animation: sunRise 2s forwards;
+}
+
+@keyframes sunRise {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  100% {
+    top: 20px; /* Arrivé à 20px du haut */
+    opacity: 1;
+  }
+}
+
+/* Conteneur pour les feuilles tombantes en mode Tree */
+.leaves-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.leaf {
+    position: absolute;
+    width: 50px;
+    height: 80px;
+    background: linear-gradient(135deg, #4CAF50, #81C784); /* dégradé vert */
+    clip-path: polygon(50% 0%, 85% 30%, 75% 100%, 25% 100%, 15% 30%);
+    animation: fall 6s ease-in-out infinite;
+    opacity: 0.8;
+  }
+  
+  /* Animation de chute de la feuille */
+  @keyframes fall {
+    0% {
+      top: -10%;
+      left: 10%;
+      transform: translateX(0) rotate(0deg) scale(1);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(20px) rotate(180deg) scale(1.1);
+    }
+    80% {
+      transform: translateX(40px) rotate(270deg) scale(0.9);
+    }
+    100% {
+      top: 110%;
+      left: 30%;
+      transform: translateX(60px) rotate(360deg) scale(0.8);
+      opacity: 0;
+    }
+  }
+  
+  /* Optionnel : ajuster les positions pour plusieurs feuilles
+     par exemple, avec des délais différents */
+  .leaves-container .leaf:nth-child(1) {
+    left: 20%;
+    animation-delay: 0s;
+  }
+  .leaves-container .leaf:nth-child(2) {
+    left: 50%;
+    animation-delay: 1s;
+  }
+  .leaves-container .leaf:nth-child(3) {
+    left: 80%;
+    animation-delay: 2s;
+  }
+
+/* Contenu principal et boutons Goo, éléments flottants, vagues, etc. restent comme définis précédemment */
+.content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  margin: 2rem;
+  transition: all 0.3s ease;
+}
+
+.content:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-5px);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: #2a5674;
+}
+
+p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.goo-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Animation pulse (déjà présente dans votre goo.css) */
+.pulse {
+  animation: pulseAnim 0.5s ease-out;
+}
+
+@keyframes pulseAnim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* (Vous pouvez conserver vos autres styles existants pour éléments flottants, vagues, etc.) */

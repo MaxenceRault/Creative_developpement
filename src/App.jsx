@@ -1,13 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import Calme from './components/calme';
+import Calme from "./components/calme";
+import Intro from "./components/intro";
+
 
 const App = () => {
-    return (
-        <div>
-            <Calme />
-        </div>
-    );
+
+  return (
+    <>
+      <Intro />
+      <Calme />
+    </>
+  );
 };
 
 export default App;
+  

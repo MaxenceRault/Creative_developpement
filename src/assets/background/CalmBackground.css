@@ -1,0 +1,106 @@
+:root {
+  --sky-top: #be91c6;
+  --sky-middle: #fea798;
+  --sky-bottom: #be91c6;
+  --mountain1-color: #ff846e;
+  --mountain2-color: #ffbc9a;
+  --sun-color: #ffeb3b;
+  --water-top: rgba(254, 167, 152, 0.5);
+  --water-bottom: #8a65cc;
+  --cloud-color: rgba(254, 167, 152, 0.3);
+}
+
+.calm-bg {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-middle), var(--sky-bottom));
+}
+
+/* Zone du ciel avec soleil et nuages */
+.sky {
+  position: relative;
+  width: 100%;
+  height: 50%;
+}
+
+.sun {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 12vmin;
+  height: 12vmin;
+  background: var(--sun-color);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--sun-color);
+}
+
+/* Nuages animés */
+.cloud {
+  position: absolute;
+  background: var(--cloud-color);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.cloud-1 {
+  top: 20%;
+  left: 10%;
+  width: 15vmin;
+  height: 8vmin;
+  animation: moveClouds 60s linear infinite;
+}
+
+.cloud-2 {
+  top: 30%;
+  right: 15%;
+  width: 18vmin;
+  height: 10vmin;
+  animation: moveClouds 80s linear infinite reverse;
+}
+
+@keyframes moveClouds {
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+/* Zone des montagnes */
+.mountains {
+  position: absolute;
+  bottom: 30%;
+  width: 100%;
+  height: 30%;
+}
+
+.mountain {
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--mountain1-color);
+  clip-path: polygon(0 100%, 50% 20%, 100% 100%);
+  opacity: 0.85;
+}
+
+.mountain-2 {
+  left: 40%;
+  background: var(--mountain2-color);
+  clip-path: polygon(0 100%, 50% 30%, 100% 100%);
+  opacity: 0.9;
+}
+
+/* Bande d'eau en bas */
+.water {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to bottom, var(--water-top), var(--water-bottom));
+  opacity: 0.95;
+}

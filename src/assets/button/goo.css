@@ -1,0 +1,97 @@
+:root {
+    --goo-blue: #7fb9e6;       /* Bleu pastel pour les barres */
+    --text-color: white;       /* Couleur du texte */
+    --text-hover: #4a7ab1;      /* Couleur du texte au survol */
+  }
+  
+  /* Wrapper principal du bouton Goo */
+  .goo-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Conteneur appliquant le filtre goo */
+  .container {
+    width: 202px;
+    position: relative;
+    height: auto;
+    margin: 70px auto;
+    filter: url(#goo);
+  }
+  
+  /* Bouton principal */
+  .calme-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    width: 200px;
+    height: 80px;
+    position: relative;
+    margin-bottom: 60px;
+    transition: 0.5s;
+  }
+  
+  /* Les barres du bouton */
+  .calme-button span {
+    display: block;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--goo-blue);
+    transition: 0.7s cubic-bezier(0, 2, 0.7, 2);
+    border-radius: 4px;
+  }
+  
+  /* Survol : augmentation de la hauteur des barres */
+  .calme-button:hover span {
+    height: 120%;
+    transition: 0.4s cubic-bezier(0.1, 1, 0.2, 4);
+  }
+  
+  /* Positions et délais pour chaque barre */
+  .calme-button span:nth-child(1) { left: 0; transition-delay: 0.25s; }
+  .calme-button span:nth-child(2) { left: 20px; transition-delay: 0.2s; }
+  .calme-button span:nth-child(3) { left: 40px; transition-delay: 0.15s; }
+  .calme-button span:nth-child(4) { left: 60px; transition-delay: 0.1s; }
+  .calme-button span:nth-child(5) { left: 80px; transition-delay: 0.05s; }
+  .calme-button span:nth-child(6) { left: 100px; transition-delay: 0s; }
+  .calme-button span:nth-child(7) { left: 120px; transition-delay: 0.05s; }
+  .calme-button span:nth-child(8) { left: 140px; transition-delay: 0.1s; }
+  .calme-button span:nth-child(9) { left: 160px; transition-delay: 0.15s; }
+  .calme-button span:nth-child(10) { left: 180px; transition-delay: 0.2s; }
+  .calme-button span:nth-child(11) { left: 200px; transition-delay: 0.25s; }
+  
+  /* Style du texte à l'intérieur du bouton */
+  .calme-button p {
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    margin: 0;
+    padding-top: 30px; /* Centrage vertical */
+    transition: 0.5s;
+  }
+  
+  .calme-button:hover p {
+    color: var(--text-hover);
+  }
+  
+  /* SVG caché pour le filtre goo */
+  .goo-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+  
