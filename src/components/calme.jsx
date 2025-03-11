@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './calme.css';
 import dropSound from '../assets/sounds/drop.mp3';
 import oceanSound from '../assets/sounds/ocean.mp3';
@@ -19,7 +20,13 @@ const GooButton = ({ soundType, soundFile, buttonText, onToggle }) => {
   };
 
   return (
-    <div ref={buttonRef} className="goo-button-wrapper">
+    <motion.div 
+      ref={buttonRef} 
+      className="goo-button-wrapper"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="goo-wrapper">
         <div className="container">
           <button className="calme-button" onClick={handleClick}>
@@ -37,7 +44,6 @@ const GooButton = ({ soundType, soundFile, buttonText, onToggle }) => {
             <p>{buttonText}</p>
           </button>
         </div>
-        {/* Filtre SVG pour l'effet goo */}
         <svg className="goo-svg">
           <defs>
             <filter id="goo">
@@ -54,7 +60,7 @@ const GooButton = ({ soundType, soundFile, buttonText, onToggle }) => {
           </defs>
         </svg>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -63,7 +69,6 @@ const Calm = () => {
   const audioRef = useRef(null);
 
   const handleToggleSound = (soundType, soundFile, buttonRef) => {
-    // Si le son cliqué est déjà actif, l'arrêter
     if (activeSound === soundType) {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -71,7 +76,6 @@ const Calm = () => {
       }
       setActiveSound(null);
     } else {
-      // Sinon, arrêter le son précédent puis jouer le nouveau
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
@@ -85,24 +89,22 @@ const Calm = () => {
     }
   };
 
-  // Lorsque le composant se démonte, arrêter le son s'il est en cours
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    };
-  }, []);
-
-  // Définir dynamiquement le fond en fonction du son actif
-  let backgroundStyle = {};
+  // Couleur des barres Goo via variable CSS --goo-blue
+  let gooButtonStyle = {};
   if (activeSound === 'drop') {
-    backgroundStyle = {
-      background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
-      transition: 'background 0.5s ease',
-    };
+    gooButtonStyle = { '--goo-blue': '#7fb9e6' }; // Bleu pastel
   } else if (activeSound === 'ocean') {
+    gooButtonStyle = { '--goo-blue': '#FFB347' }; // Teinte coucher de soleil (golden)
+  } else if (activeSound === 'tree') {
+    gooButtonStyle = { '--goo-blue': '#4CAF50' }; // Vert
+  } else {
+    gooButtonStyle = { '--goo-blue': '#7fb9e6' };
+  }
+
+  // Background dynamique
+  let backgroundStyle = {};
+  
+  if (activeSound === 'ocean') {
     backgroundStyle = {
       background: 'linear-gradient(135deg, #FF7E5F, #FEB47B)',
       transition: 'background 0.5s ease',
@@ -120,47 +122,66 @@ const Calm = () => {
   }
 
   return (
-    <div className="calm-container" style={backgroundStyle}>
-      {/* Afficher le soleil pour Ocean et Tree */}
-      {(activeSound === 'ocean' || activeSound === 'tree') && (
-        <div className="sun-element"></div>
-      )}
-      {/* Pour le mode Tree, afficher aussi des feuilles tombantes */}
-      {activeSound === 'tree' && (
-        <div className="leaves-container">
-          <div className="leaf"></div>
-          <div className="leaf"></div>
-          <div className="leaf"></div>
-        </div>
-      )}
+    <motion.div 
+      className="calm-container" 
+      style={backgroundStyle}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      {/* Afficher le soleil pour Ocean et Tree avec une animation de montée */}
+      <AnimatePresence>
+        {(activeSound === 'ocean' || activeSound === 'tree') && (
+          <motion.div 
+            className="sun-element"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 2 }}
+          />
+        )}
+      </AnimatePresence>
+      
+      {/* Feuilles tombantes uniquement pour Tree */}
+      <AnimatePresence>
+        {activeSound === 'tree' && (
+          <motion.div 
+            className="leaves-container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="leaf"></div>
+            <div className="leaf"></div>
+            <div className="leaf"></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="content">
-        <h1>Calme</h1>
-        <p>
-          Un horizon serein et apaisant où des teintes pastel et un léger mouvement de fond invitent à la détente.
-        </p>
-      </div>
-      <div className="goo-buttons">
-        <GooButton
-          soundType="drop"
-          soundFile={dropSound}
-          buttonText="Drop"
-          onToggle={handleToggleSound}
-        />
-        <GooButton
-          soundType="ocean"
-          soundFile={oceanSound}
-          buttonText="Ocean"
-          onToggle={handleToggleSound}
-        />
-        <GooButton
-          soundType="tree"
-          soundFile={treeSound}
-          buttonText="Tree"
-          onToggle={handleToggleSound}
-        />
-      </div>
-    </div>
+      <motion.div 
+        className="content"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      >
+        <h1>Le calme
+        </h1>
+        
+      </motion.div>
+      
+      <motion.div 
+        className="goo-buttons" 
+        style={gooButtonStyle}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.8 }}
+      >
+        <GooButton soundType="drop" soundFile={dropSound} buttonText="Drop" onToggle={handleToggleSound} />
+        <GooButton soundType="ocean" soundFile={oceanSound} buttonText="Ocean" onToggle={handleToggleSound} />
+        <GooButton soundType="tree" soundFile={treeSound} buttonText="Tree" onToggle={handleToggleSound} />
+      </motion.div>
+    </motion.div>
   );
 };
 
