@@ -1,0 +1,22 @@
+.navigation {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .navigation button {
+    padding: 10px;
+    font-size: 18px;
+    background-color: #4a7ab1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navigation button:hover {
+    background-color: #3a5a81;
+  }

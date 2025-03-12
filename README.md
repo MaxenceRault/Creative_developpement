@@ -1,12 +1,27 @@
-# React + Vite
+# Projet Creative développement  Rault Maxence Delscenserie Kilian
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ce projet est fait avec React.js et vite , pour certaine animation , on utilise le framer motion et anime.js
 
-Currently, two official plugins are available:
+# Émotion 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Les émotions présenté sur la page sont : Le calme/ L'apaisement , Le sens du mystère , et la frustration
 
-## Expanding the ESLint configuration
+# Indication navigation 
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Pour naviguer , utiliser les flèche en bas a droite 
+
+p.s : Sur la page lié au mystere , aller sur les flèche avec les tabulations
+
+# Lancer le Projet
+
+```bash
+
+git clone https://github.com/MaxenceRault/Creative_developpement.git
+
+npm install
+
+npm run dev 
+
+``` 
+
+Si vous avez des question ou  des problème contactez moi sur raultmaxence05@gmail.com

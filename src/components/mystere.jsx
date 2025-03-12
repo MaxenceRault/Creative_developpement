@@ -151,14 +151,17 @@ const Mystere = () => {
       </AnimatePresence>
 
       {/* Effet de lampe torche */}
-      <div
-        className="torch"
-        style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
-          background: `radial-gradient(circle, rgba(255,0,0,${heat}) 10%, rgba(255,165,0,${heat * 0.8}) 30%, rgba(0,0,255,0.3) 80%)`,
-        }}
-      ></div>
+      {!showQuestionnaire && (
+        <div
+          className="torch"
+          style={{
+            left: `${mousePos.x}px`,
+            top: `${mousePos.y}px`,
+            background: `radial-gradient(circle, rgba(255,0,0,${heat}) 10%, rgba(255,165,0,${heat * 0.8}) 30%, rgba(0,0,255,0.3) 80%)`,
+            pointerEvents: 'none'
+          }}
+        ></div>
+      )}
 
       {/* Corps de la page Mystère */}
       <div className="mystere-body">
