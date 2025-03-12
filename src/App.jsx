@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Calme from './components/calme';
+import Mystere from './components/mystere';
 
 const App = () => {
     return (
         <div>
-            <Calme />
+            <Mystere />
         </div>
     );
 };
