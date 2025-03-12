@@ -2,49 +2,121 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './mystere.css';
 
-const elementsData = [
-  { id: 1, x: 200, y: 300, correctAnswer: 'rouge', universe: 'mario' },
-  { id: 2, x: 600, y: 150, correctAnswer: 'bleu', universe: 'starwars' },
-  { id: 3, x: 400, y: 500, correctAnswer: 'vert', universe: 'dc' },
-  { id: 4, x: 900, y: 350, correctAnswer: 'jaune', universe: 'harrypotter' },
-  { id: 5, x: 700, y: 600, correctAnswer: 'violet', universe: 'lotr' },
-];
+// Importer les images via ES modules
+import hinataImg from '../assets/images/hinata.png';
+import gokuImg from '../assets/images/goku.png';
+import luffyImg from '../assets/images/luffy.png';
+import pikachuImg from '../assets/images/pikachu.png';
+import marioImg from '../assets/images/mario.png';
+
+// Générer des éléments interactifs avec des positions aléatoires sur toute la fenêtre
+const generateElements = () => {
+  return [
+    {
+      id: 1,
+      x: Math.floor(Math.random() * (window.innerWidth - 100)) + 'px',
+      y: Math.floor(Math.random() * (window.innerHeight - 100)) + 'px',
+      correctAnswer: 'hinata',
+      name: 'Hinata',
+      universe: 'Haikyuu',
+      options: ['Hinata', 'Kageyama', 'Oikawa'],
+      image: hinataImg,
+    },
+    {
+      id: 2,
+      x: Math.floor(Math.random() * (window.innerWidth - 100)) + 'px',
+      y: Math.floor(Math.random() * (window.innerHeight - 100)) + 'px',
+      correctAnswer: 'goku',
+      name: 'Goku',
+      universe: 'Dragon Ball',
+      options: ['Goku', 'Vegeta', 'Gohan'],
+      image: gokuImg,
+    },
+    {
+      id: 3,
+      x: Math.floor(Math.random() * (window.innerWidth - 100)) + 'px',
+      y: Math.floor(Math.random() * (window.innerHeight - 100)) + 'px',
+      correctAnswer: 'luffy',
+      name: 'Luffy',
+      universe: 'One Piece',
+      options: ['Luffy', 'Zoro', 'Sanji'],
+      image: luffyImg,
+    },
+    {
+      id: 4,
+      x: Math.floor(Math.random() * (window.innerWidth - 100)) + 'px',
+      y: Math.floor(Math.random() * (window.innerHeight - 100)) + 'px',
+      correctAnswer: 'pikachu',
+      name: 'Pikachu',
+      universe: 'Pokemon',
+      options: ['Pikachu', 'Charmander', 'Bulbasaur'],
+      image: pikachuImg,
+    },
+    {
+      id: 5,
+      x: Math.floor(Math.random() * (window.innerWidth - 100)) + 'px',
+      y: Math.floor(Math.random() * (window.innerHeight - 100)) + 'px',
+      correctAnswer: 'mario',
+      name: 'Mario',
+      universe: 'Mario',
+      options: ['Mario', 'Luigi', 'Peach'],
+      image: marioImg,
+    },
+  ];
+};
 
 const Mystere = () => {
-  const [found, setFound] = useState([]);       // IDs des éléments trouvés
+  const [elements, setElements] = useState([]);
+  const [found, setFound] = useState([]); // IDs des éléments trouvés
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [heat, setHeat] = useState(0);           // 0 = froid, 1 = chaud
+  const [heat, setHeat] = useState(0); // 0 = froid, 1 = chaud
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [answers, setAnswers] = useState({});
   const [score, setScore] = useState(null);
+  const [showIntro, setShowIntro] = useState(true);
+  const [activeHead, setActiveHead] = useState(null); // L'élément dont la tête est affichée
 
+  // Générer les éléments au montage
+  useEffect(() => {
+    setElements(generateElements());
+    const timer = setTimeout(() => {
+      setShowIntro(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Suivre la souris pour l'effet "lampe torche"
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
-      // Calculer la distance minimale entre la position de la souris et les éléments non trouvés
       let minDist = Infinity;
-      elementsData.forEach((el) => {
+      elements.forEach((el) => {
         if (!found.includes(el.id)) {
-          const dist = Math.hypot(e.clientX - el.x, e.clientY - el.y);
+          const dist = Math.hypot(e.clientX - parseInt(el.x), e.clientY - parseInt(el.y));
           if (dist < minDist) minDist = dist;
         }
       });
-      // Mise à jour de la "chaleur"
-      if (minDist < 100) setHeat(1); // très proche => chaud
-      else if (minDist < 200) setHeat(0.5); // intermédiaire
-      else setHeat(0); // éloigné => froid
+      if (minDist < 100) setHeat(1);
+      else if (minDist < 200) setHeat(0.5);
+      else setHeat(0);
     };
-
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [found]);
+  }, [elements, found]);
 
+  // Lors du clic sur un élément, afficher la tête en overlay sur tout l'écran
   const handleElementClick = (id) => {
     if (!found.includes(id)) {
-      setFound([...found, id]);
-      if (found.length + 1 === elementsData.length) {
-        setTimeout(() => setShowQuestionnaire(true), 500);
-      }
+      const element = elements.find(el => el.id === id);
+      setActiveHead(element); // Afficher l'image en overlay
+      // Après 3 secondes, marquer l'élément comme trouvé et masquer l'overlay
+      setTimeout(() => {
+        setFound([...found, id]);
+        setActiveHead(null);
+        if (found.length + 1 === elements.length) {
+          setTimeout(() => setShowQuestionnaire(true), 500);
+        }
+      }, 3000);
     }
   };
 
@@ -55,15 +127,30 @@ const Mystere = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let sc = 0;
-    elementsData.forEach((el) => {
-      if (answers[el.id] === el.correctAnswer) sc += 1;
+    elements.forEach((el) => {
+      if (answers[el.id] === el.correctAnswer.toLowerCase()) sc += 1;
     });
     setScore(sc);
   };
 
   return (
     <div className="mystere-container">
-      {/* Effet lampe torche */}
+      {/* Texte d'introduction */}
+      <AnimatePresence>
+        {showIntro && (
+          <motion.div
+            className="intro-text"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 1 }}
+          >
+            <h2>Le sens du mystere : Trouver les élement et repondez au questionnaire</h2>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Effet de lampe torche */}
       <div
         className="torch"
         style={{
@@ -73,23 +160,21 @@ const Mystere = () => {
         }}
       ></div>
 
-      {/* "Body" de la page Mystère */}
+      {/* Corps de la page Mystère */}
       <div className="mystere-body">
-        {/* Éléments interactifs */}
+        {/* Éléments interactifs - les cercles sont cachés par défaut et ne deviennent visibles que lorsqu'on les survole */}
         {!showQuestionnaire && (
           <div className="elements-container">
-            {elementsData.map((el) => (
+            {elements.map((el) => (
               <motion.div
                 key={el.id}
                 className={`mystere-element ${found.includes(el.id) ? 'found' : ''}`}
-                style={{ left: `${el.x}px`, top: `${el.y}px` }}
+                style={{ left: el.x, top: el.y }}
                 onClick={() => handleElementClick(el.id)}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: found.includes(el.id) ? 1 : 0, scale: found.includes(el.id) ? 1.2 : 1 }}
+                initial={{ opacity: 0, scale: 1 }}
+                animate={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-              >
-                {found.includes(el.id) && <span>{el.universe}</span>}
-              </motion.div>
+              />
             ))}
           </div>
         )}
@@ -97,7 +182,7 @@ const Mystere = () => {
         {/* Questionnaire final */}
         <AnimatePresence>
           {showQuestionnaire && (
-            <motion.div 
+            <motion.div
               className="questionnaire"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -106,7 +191,7 @@ const Mystere = () => {
             >
               <h2>Questionnaire</h2>
               <form onSubmit={handleSubmit}>
-                {elementsData.map((el) => (
+                {elements.map((el) => (
                   <div key={el.id} className="question">
                     <label>
                       Qui est présent dans l'univers {el.universe}? <br />
@@ -126,11 +211,34 @@ const Mystere = () => {
                 ))}
                 <button type="submit">Valider</button>
               </form>
-              {score !== null && <p>Votre score : {score} / {elementsData.length}</p>}
+              {score !== null && <p>Votre score : {score} / {elements.length}</p>}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
+
+      {/* Overlay pour afficher la tête en grand lorsqu'un élément est cliqué */}
+      <AnimatePresence>
+        {activeHead && (
+          <motion.div
+            className="head-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <motion.img
+              src={activeHead.image}
+              alt={activeHead.name}
+              className="head-image"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              transition={{ duration: 1 }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
