@@ -8,6 +8,7 @@ const VolumeTrap = () => {
     const [playOnce, setPlayOnce] = useState(false);
     const [buttonEscaping, setButtonEscaping] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isWobbling, setIsWobbling] = useState(false);
     const audioRef = useRef(null);
     const buttonRef = useRef(null);
 
@@ -33,10 +34,12 @@ const VolumeTrap = () => {
                     playPromise.then(() => {
                         setIsPlaying(true);
                         setPlayOnce(true);
+                        setIsWobbling(true); // Commence l'animation de tremblement
                     }).catch(error => console.error("Audio playback error:", error));
                 } else {
                     setIsPlaying(true);
                     setPlayOnce(true);
+                    setIsWobbling(true); // Commence l'animation de tremblement
                 }
             }
         }
@@ -56,8 +59,8 @@ const VolumeTrap = () => {
 
     return (
         <div className="frustration-container">
-            <h1 className="wobble frustration-h1">La frustration</h1>
-            <p className="wobble frustration-p">
+            <h1 className={`frustration-h1 ${isWobbling ? 'wobble' : ''}`}>La frustration</h1>
+            <p className={`frustration-p ${isWobbling ? 'wobble' : ''}`}>
                 Augmentez le volume au max et appuyez sur play pour entendre le magnifique son.
             </p>
             <audio

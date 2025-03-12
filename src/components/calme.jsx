@@ -172,7 +172,7 @@ const Calm = () => {
           whileHover={{ scale: 1.03, transition: { duration: 0.5 } }}
         >
           Plongez dans un univers où chaque nuance de bleu, de doré ou de vert est pensée pour vous envelopper d'une sensation de sérénité profonde.
-          Laissez-vous bercer par la douceur du mouvement, l'éclat discret du soleil et la danse légère des feuilles.
+          Laissez-vous bercer par les sons d'ambiance de cascade , d'océan et de forêt.
         </motion.p>
       </motion.div>
       
@@ -184,9 +184,9 @@ const Calm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.8 }}
       >
-        <GooButton soundType="drop" soundFile={dropSound} buttonText="Drop" onToggle={handleToggleSound} />
+        <GooButton soundType="drop" soundFile={dropSound} buttonText="Cascade en fond" onToggle={handleToggleSound} />
         <GooButton soundType="ocean" soundFile={oceanSound} buttonText="Ocean" onToggle={handleToggleSound} />
-        <GooButton soundType="tree" soundFile={treeSound} buttonText="Tree" onToggle={handleToggleSound} />
+        <GooButton soundType="tree" soundFile={treeSound} buttonText="Foret" onToggle={handleToggleSound} />
       </motion.div>
     </motion.div>
   );

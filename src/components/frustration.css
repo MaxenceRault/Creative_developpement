@@ -60,8 +60,29 @@
   }
   
   /* Effet "wobble" sur le hover */
-  .wobble:hover {
-    animation: shake 0.3s infinite;
+  @keyframes wobble {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    15% {
+      transform: translateX(-25px) rotate(-5deg);
+    }
+    30% {
+      transform: translateX(20px) rotate(3deg);
+    }
+    45% {
+      transform: translateX(-15px) rotate(-3deg);
+    }
+    60% {
+      transform: translateX(10px) rotate(2deg);
+    }
+    75% {
+      transform: translateX(-5px) rotate(-1deg);
+    }
+  }
+  
+  .wobble {
+    animation: wobble 1s infinite;
   }
   
   @keyframes shake {

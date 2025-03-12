@@ -6,7 +6,10 @@ const Intro = () => {
     <section className="intro">
       <h1 className="intro-title">Bienvenue dans notre Voyage Émotionnel</h1>
       <p className="intro-subtitle">
-        Laissez-vous emporter par des univers qui apaisent l’esprit et éveillent la sensibilité.
+        Laissez-vous emporter par des univers qui apaisent l’esprit, vous donne le sens du mystere et vous fait resentir de la frustration.
+      </p>
+      <p className="intro-subtitle">
+        Mettez un casque ou des écouteur pour une meilleur experience.
       </p>
     </section>
   );
