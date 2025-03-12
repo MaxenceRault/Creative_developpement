@@ -1,10 +1,10 @@
 :root {
-  --goo-blue: #7fb9e6;       /* Bleu pastel pour les barres */
-  --text-color: white;       /* Couleur du texte */
-  --text-hover: #4a7ab1;      /* Couleur du texte au survol */
+  --goo-blue: #7fb9e6;       
+  --text-color: white;       
+  --text-hover: #4a7ab1;      
 }
 
-/* Wrapper principal du bouton Goo */
+
 .goo-wrapper {
   position: relative;
   display: flex;
@@ -22,7 +22,6 @@
   filter: url(#goo);
 }
 
-/* Bouton principal */
 .calme-button {
   background: none;
   color: inherit;
@@ -45,12 +44,12 @@
   box-shadow: none;
 }
 
-/* Pour Firefox, enlever la bordure interne */
+
 .calme-button::-moz-focus-inner {
   border: 0;
 }
 
-/* Les barres du bouton */
+
 .calme-button span {
   display: block;
   width: 20px;
@@ -83,7 +82,7 @@
 .calme-button span:nth-child(10) { left: 180px; transition-delay: 0.2s; }
 .calme-button span:nth-child(11) { left: 200px; transition-delay: 0.25s; }
 
-/* Style du texte à l'intérieur du bouton */
+
 .calme-button p {
   color: var(--text-color);
   font-size: 16px;
@@ -92,7 +91,7 @@
   position: relative;
   z-index: 10;
   margin: 0;
-  padding-top: 30px; /* Centrage vertical */
+  padding-top: 30px; 
   transition: 0.5s;
   margin-left: 22px;
 }

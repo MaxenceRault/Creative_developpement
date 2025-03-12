@@ -89,19 +89,19 @@ const Calm = () => {
     }
   };
 
-  // Définir la couleur des barres Goo via la variable CSS --goo-blue
+  // Définition la couleur des barres Goo 
   let gooButtonStyle = {};
   if (activeSound === 'drop') {
-    gooButtonStyle = { '--goo-blue': '#7fb9e6' }; // Bleu pastel
+    gooButtonStyle = { '--goo-blue': '#7fb9e6' }; 
   } else if (activeSound === 'ocean') {
-    gooButtonStyle = { '--goo-blue': '#FFB347' }; // Teinte coucher de soleil
+    gooButtonStyle = { '--goo-blue': '#FFB347' };
   } else if (activeSound === 'tree') {
-    gooButtonStyle = { '--goo-blue': '#4CAF50' }; // Vert
+    gooButtonStyle = { '--goo-blue': '#4CAF50' }; 
   } else {
     gooButtonStyle = { '--goo-blue': '#7fb9e6' };
   }
 
-  // Définir le background dynamique
+  // Background dynamique
   let backgroundStyle = {};
   if (activeSound === 'ocean') {
     backgroundStyle = {
@@ -125,7 +125,7 @@ const Calm = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* Soleil : affiché pour Ocean et Tree avec animation de montée */}
+      {/* Soleil : affiché pour Ocean et Tree avec animation de montée mais un peu bugué*/}
       <AnimatePresence>
         {(activeSound === 'ocean' || activeSound === 'tree') && (
           <motion.div 
@@ -138,7 +138,7 @@ const Calm = () => {
         )}
       </AnimatePresence>
       
-      {/* Feuilles tombantes pour Tree */}
+      {/* Feuilles tombantes pour "foret"*/}
       <AnimatePresence>
         {activeSound === 'tree' && (
           <motion.div 
@@ -155,7 +155,7 @@ const Calm = () => {
         )}
       </AnimatePresence>
 
-      {/* Contenu principal animé au scroll ou au survol */}
+      {/* remplissage de couleur */}
       <motion.div 
         className="content"
         initial={{ y: 50, opacity: 0 }}
@@ -176,7 +176,7 @@ const Calm = () => {
         </motion.p>
       </motion.div>
       
-      {/* Boutons Goo animés */}
+      {/* Boutons animé */}
       <motion.div 
         className="goo-buttons" 
         style={gooButtonStyle}

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './mystere.css';
-
-// Importer les images via ES modules
 import hinataImg from '../assets/images/hinata.png';
 import gokuImg from '../assets/images/goku.png';
 import luffyImg from '../assets/images/luffy.png';
 import pikachuImg from '../assets/images/pikachu.png';
 import marioImg from '../assets/images/mario.png';
 
-// Générer des éléments interactifs avec des positions aléatoires sur toute la fenêtre
+// Génération des éléments interactifs avec des positions aléatoires sur toute la fenêtre
 const generateElements = () => {
   return [
     {
@@ -104,11 +102,11 @@ const Mystere = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [elements, found]);
 
-  // Lors du clic sur un élément, afficher la tête en overlay sur tout l'écran
+  // Lors du clic sur un élément, affichage la tête en overlay sur tout l'écran
   const handleElementClick = (id) => {
     if (!found.includes(id)) {
       const element = elements.find(el => el.id === id);
-      setActiveHead(element); // Afficher l'image en overlay
+      setActiveHead(element);
       // Après 3 secondes, marquer l'élément comme trouvé et masquer l'overlay
       setTimeout(() => {
         setFound([...found, id]);
@@ -135,7 +133,7 @@ const Mystere = () => {
 
   return (
     <div className="mystere-container">
-      {/* Texte d'introduction */}
+      {/* Intro */}
       <AnimatePresence>
         {showIntro && (
           <motion.div
@@ -145,7 +143,7 @@ const Mystere = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 1 }}
           >
-            <h2>Le sens du mystere : Trouver les élement et repondez au questionnaire</h2>
+            <h2>Le sens du mystere : Trouver les 5 élements et répondez au questionnaire</h2>
           </motion.div>
         )}
       </AnimatePresence>
@@ -163,9 +161,9 @@ const Mystere = () => {
         ></div>
       )}
 
-      {/* Corps de la page Mystère */}
+     
       <div className="mystere-body">
-        {/* Éléments interactifs - les cercles sont cachés par défaut et ne deviennent visibles que lorsqu'on les survole */}
+        {/* Éléments interactifs - les cercles sont cachés et le curseur de la souris ne change que quand on passe dessus*/}
         {!showQuestionnaire && (
           <div className="elements-container">
             {elements.map((el) => (
@@ -182,7 +180,7 @@ const Mystere = () => {
           </div>
         )}
 
-        {/* Questionnaire final */}
+       
         <AnimatePresence>
           {showQuestionnaire && (
             <motion.div

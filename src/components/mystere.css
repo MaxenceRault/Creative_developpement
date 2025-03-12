@@ -7,7 +7,7 @@
   color: #fff;
 }
 
-/* Texte d'introduction */
+
 .intro-text {
   position: absolute;
   top: 30%;
@@ -38,7 +38,7 @@
   z-index: 5;
 }
 
-/* Corps de la page Mystère */
+
 .mystere-body {
   position: relative;
   z-index: 6;
@@ -50,7 +50,7 @@
   justify-content: center;
 }
 
-/* Conteneur des éléments interactifs */
+
 .elements-container {
   position: absolute;
   width: 100%;
@@ -58,7 +58,7 @@
   z-index: 7;
 }
 
-/* Chaque élément interactif (cercle) - caché par défaut */
+/* Chaque élément interactif (cercle)*/
 .mystere-element {
   position: absolute;
   width: 60px;
@@ -67,7 +67,7 @@
   background: #333;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
-  /* Reste invisible, mais au survol (si la torche l'illumine) on peut ajouter un effet en CSS */
+  
 }
 
 .mystere-element:hover {
@@ -103,7 +103,7 @@
   box-shadow: 0 0 30px rgba(255,255,255,0.8);
 }
 
-/* Questionnaire */
+
 .questionnaire {
   position: relative;
   z-index: 8;
