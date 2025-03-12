@@ -1,17 +1,12 @@
 import React from "react";
 
-import Calme from "./components/calme";
-import Intro from "./components/intro";
-import Mystere from "./components/mystere";
-
+import Calme from './components/calme';
 
 const App = () => {
     return (
-        <>
-            <Intro />
+        <div>
             <Calme />
-            <Mystere />
-        </>
+        </div>
     );
 };
 
